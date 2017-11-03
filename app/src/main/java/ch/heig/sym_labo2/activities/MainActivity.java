@@ -1,4 +1,4 @@
-package ch.heig.sym_labo2;
+package ch.heig.sym_labo2.activities;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -6,7 +6,9 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-    public class MainActivity extends AppCompatActivity {
+import ch.heig.sym_labo2.R;
+
+public class MainActivity extends AppCompatActivity {
 
     private Button button1 = null;
     private Button button2 = null;
@@ -24,7 +26,6 @@ import android.widget.Button;
         this.button4 = (Button) findViewById(R.id.button_ex4);
 
         button1.setOnClickListener(new View.OnClickListener() {
-
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, AsyncSendRequestActivity.class);

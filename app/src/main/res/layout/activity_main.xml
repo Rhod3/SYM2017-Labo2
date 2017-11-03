@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="ch.heig.sym_labo2.MainActivity">
+    tools:context="ch.heig.sym_labo2.activities.MainActivity">
 
     <Button
         android:id="@+id/button_ex1"
