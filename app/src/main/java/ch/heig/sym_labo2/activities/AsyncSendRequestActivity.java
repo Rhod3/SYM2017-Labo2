@@ -1,38 +1,24 @@
 package ch.heig.sym_labo2.activities;
 
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import ch.heig.sym_labo2.R;
-import ch.heig.sym_labo2.utils.CommunicationEventListener;
+import ch.heig.sym_labo2.SymComManager.SCMAsyncSendRequest;
+import ch.heig.sym_labo2.SymComManager.SymComManager;
 
 public class AsyncSendRequestActivity extends AppCompatActivity {
 
-    // Classe privée de gestion des appels asynchrones à un serveur
-    private class SymComManager extends AsyncTask<String, String, String> {
-
-        public String sendRequest(String request, String url) throws Exception {
-            return null;
-        }
-
-        public void setCommunicationEventListener(CommunicationEventListener l) {
-
-        }
-
-        @Override
-        protected String doInBackground(String... strings) {
-            return null;
-        }
-    }
-
     // Attributs
-    private Button button = null;
+    private Button sendButton = null;
     private EditText inputText = null;
-    private final SymComManager mcm = new SymComManager();
+    private TextView responseText = null;
+    private SymComManager symComManager = null;
 
     // Méthodes de gestion de l'activité
     @Override
@@ -40,21 +26,30 @@ public class AsyncSendRequestActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.content_async_send_request);
 
-        this.button = (Button) findViewById(R.id.asyncSendButton);
-        this.inputText = (EditText) findViewById(R.id.inputText);
+        sendButton = (Button) findViewById(R.id.asyncSendButton);
+        inputText = (EditText) findViewById(R.id.inputText);
+        responseText = (TextView) findViewById(R.id.responseFromServerTextView);
 
-        final SymComManager mcm = new SymComManager();
+        symComManager = new SCMAsyncSendRequest(this);
+        symComManager.start();
 
-        button.setOnClickListener(new View.OnClickListener() {
+        sendButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 try {
-                    mcm.sendRequest(inputText.getText().toString(), "http://sym.iict.ch/rest/txt");
+                    symComManager.sendRequest(inputText.getText().toString(), "http://sym.iict.ch/rest/txt");
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
             }
         });
+    }
 
+    public void setResponseText(String text) {
+        responseText.setText(text);
+    }
+
+    public void toast(String text) {
+        Toast.makeText(this.getApplicationContext(), text, Toast.LENGTH_SHORT);
     }
 }
