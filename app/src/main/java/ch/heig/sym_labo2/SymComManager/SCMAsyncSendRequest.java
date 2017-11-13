@@ -8,10 +8,12 @@ import java.io.IOException;
 import ch.heig.sym_labo2.activities.AsyncSendRequestActivity;
 import okhttp3.Call;
 import okhttp3.Callback;
+import okhttp3.Headers;
 import okhttp3.MediaType;
 import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
+import okhttp3.ResponseBody;
 
 public class SCMAsyncSendRequest extends SymComManager {
 
@@ -29,14 +31,21 @@ public class SCMAsyncSendRequest extends SymComManager {
 
             @Override
             public void onResponse(Call call, final Response response) throws IOException {
-                if (!response.isSuccessful()) {
-                    throw new IOException("Unexpected code " + response);
-                } else {
+                String tmp = "";
+                try (ResponseBody responseBody = response.body()) {
+                    if (!response.isSuccessful()) throw new IOException("Unexpected code " + response);
+
+                    Headers responseHeaders = response.headers();
+                    for (int i = 0, size = responseHeaders.size(); i < size; i++) {
+                        tmp += responseHeaders.name(i) + ": " + responseHeaders.value(i) + "\n";
+                    }
+                    tmp += responseBody.string();
+                    final String res = tmp;
+
                     getActivity().runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            // Cast is ugly
-                            ((AsyncSendRequestActivity) getActivity()).setResponseText(response.toString());
+                            ((AsyncSendRequestActivity) getActivity()).setResponseText(res);
                         }
                     });
                 }
