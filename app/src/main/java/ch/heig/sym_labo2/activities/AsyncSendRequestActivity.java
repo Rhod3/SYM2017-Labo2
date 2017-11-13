@@ -12,7 +12,7 @@ import ch.heig.sym_labo2.R;
 import ch.heig.sym_labo2.SymComManager.SCMAsyncSendRequest;
 import ch.heig.sym_labo2.SymComManager.SymComManager;
 
-public class AsyncSendRequestActivity extends AppCompatActivity {
+public class AsyncSendRequestActivity extends SCMActivities {
 
     // Attributs
     private Button sendButton = null;

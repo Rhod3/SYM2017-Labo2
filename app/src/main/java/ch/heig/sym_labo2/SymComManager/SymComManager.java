@@ -1,17 +1,17 @@
 package ch.heig.sym_labo2.SymComManager;
 
 import android.app.Activity;
-import android.os.AsyncTask;
 
 import java.util.concurrent.TimeUnit;
 
+import ch.heig.sym_labo2.activities.SCMActivities;
 import okhttp3.Callback;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 
 public abstract class SymComManager extends Thread {
 
-    private Activity activity;
+    private SCMActivities activity;
     private final String mainURL = "http://sym.iict.ch/";
     private static OkHttpClient client = new OkHttpClient.Builder()
                                             .connectTimeout(5, TimeUnit.SECONDS)
@@ -19,7 +19,7 @@ public abstract class SymComManager extends Thread {
                                             .readTimeout(5, TimeUnit.SECONDS)
                                             .build();
 
-    public SymComManager(Activity activity){
+    public SymComManager(SCMActivities activity){
         this.activity = activity;
     }
 
@@ -28,11 +28,11 @@ public abstract class SymComManager extends Thread {
     }
 
     public void sendRequest(String payload, String url) throws Exception {
-        Request request = buildRequest(payload, url);
+        Request request = buildPostRequest(payload, url);
         client.newCall(request).enqueue(responseCallback());
     }
 
-    public Activity getActivity(){
+    public SCMActivities getActivity(){
         return activity;
     }
 
@@ -42,5 +42,5 @@ public abstract class SymComManager extends Thread {
 
     public abstract Callback responseCallback();
 
-    public abstract Request buildRequest(String request, String url);
+    public abstract Request buildPostRequest(String request, String url);
 }
