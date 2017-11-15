@@ -9,7 +9,7 @@ import okhttp3.Callback;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 
-public abstract class SymComManager extends Thread {
+public abstract class SymComManager {
 
     private SCMActivities activity;
     private final String mainURL = "http://sym.iict.ch/";
@@ -21,10 +21,6 @@ public abstract class SymComManager extends Thread {
 
     public SymComManager(SCMActivities activity){
         this.activity = activity;
-    }
-
-    public void run() {
-        // compute primes larger than minPrime
     }
 
     public void sendRequest(String payload, String url) throws Exception {
@@ -42,5 +38,5 @@ public abstract class SymComManager extends Thread {
 
     public abstract Callback responseCallback();
 
-    public abstract Request buildPostRequest(String request, String url);
+    public abstract Request buildPostRequest(String payload, String url);
 }

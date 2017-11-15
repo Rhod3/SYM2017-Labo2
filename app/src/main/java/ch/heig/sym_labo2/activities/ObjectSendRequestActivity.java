@@ -7,10 +7,10 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import ch.heig.sym_labo2.R;
-import ch.heig.sym_labo2.SymComManager.SCMAsyncSendRequest;
+import ch.heig.sym_labo2.SymComManager.SCMJsonObject;
 import ch.heig.sym_labo2.SymComManager.SymComManager;
 
-public class AsyncSendRequestActivity extends SCMActivities {
+public class ObjectSendRequestActivity extends SCMActivities {
 
     // Attributs
     private Button sendButton = null;
@@ -18,30 +18,31 @@ public class AsyncSendRequestActivity extends SCMActivities {
     private TextView responseText = null;
     private SymComManager symComManager = null;
 
-    // Méthodes de gestion de l'activité
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.content_async_send_request);
+        setContentView(R.layout.activity_object_send_request);
 
-        sendButton = (Button) findViewById(R.id.asyncSendButton);
-        inputText = (EditText) findViewById(R.id.inputText);
-        responseText = (TextView) findViewById(R.id.responseFromServerTextView);
+        sendButton = (Button) findViewById(R.id.objectSendButton);
+        inputText = (EditText) findViewById(R.id.inputJson);
+        responseText = (TextView) findViewById(R.id.jsonResponseFromServerTextView);
 
-        symComManager = new SCMAsyncSendRequest(this);
+        symComManager = new SCMJsonObject(this);
 
         sendButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 try {
-                    symComManager.sendRequest(inputText.getText().toString(), "http://sym.iict.ch/rest/txt");
+                    symComManager.sendRequest(inputText.getText().toString(), "http://sym.iict.ch/rest/json");
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
             }
         });
+
     }
 
+    @Override
     public void setResponseText(String text) {
         responseText.setText(text);
     }

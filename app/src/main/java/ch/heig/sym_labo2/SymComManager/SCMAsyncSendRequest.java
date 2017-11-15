@@ -1,10 +1,7 @@
 package ch.heig.sym_labo2.SymComManager;
 
-import android.app.Activity;
-
 import java.io.IOException;
 
-import ch.heig.sym_labo2.activities.AsyncSendRequestActivity;
 import ch.heig.sym_labo2.activities.SCMActivities;
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -46,7 +43,6 @@ public class SCMAsyncSendRequest extends SymComManager {
                     getActivity().runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            // Ugly cast
                             getActivity().setResponseText(res);
                         }
                     });

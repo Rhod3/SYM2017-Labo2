@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">SYM Labo2</string>
-    <string name="title_activity_async_send_request">AsyncSendRequestActivity</string>
+    <string name="title_activity_async_send_request">Async</string>
+    <string name="title_activity_object_send_request">JSON</string>
 </resources>
