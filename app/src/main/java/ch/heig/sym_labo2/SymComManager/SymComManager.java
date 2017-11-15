@@ -12,7 +12,6 @@ import okhttp3.Request;
 public abstract class SymComManager {
 
     private SCMActivities activity;
-    private final String mainURL = "http://sym.iict.ch/";
     private static OkHttpClient client = new OkHttpClient.Builder()
                                             .connectTimeout(5, TimeUnit.SECONDS)
                                             .writeTimeout(5, TimeUnit.SECONDS)
@@ -32,8 +31,8 @@ public abstract class SymComManager {
         return activity;
     }
 
-    public String getMainURL(){
-        return mainURL;
+    public OkHttpClient getClient(){
+        return client;
     }
 
     public abstract Callback responseCallback();
