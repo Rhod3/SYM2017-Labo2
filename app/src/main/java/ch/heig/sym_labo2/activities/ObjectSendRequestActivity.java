@@ -1,6 +1,7 @@
 package ch.heig.sym_labo2.activities;
 
 import android.os.Bundle;
+import android.text.method.ScrollingMovementMethod;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -26,6 +27,7 @@ public class ObjectSendRequestActivity extends SCMActivities {
         sendButton = (Button) findViewById(R.id.objectSendButton);
         inputText = (EditText) findViewById(R.id.inputJson);
         responseText = (TextView) findViewById(R.id.jsonResponseFromServerTextView);
+        responseText.setMovementMethod(new ScrollingMovementMethod());
 
         symComManager = new SCMJsonObject(this);
 
