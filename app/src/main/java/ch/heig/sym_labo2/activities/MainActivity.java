@@ -1,5 +1,6 @@
 package ch.heig.sym_labo2.activities;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -7,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 
 import ch.heig.sym_labo2.R;
+import ch.heig.sym_labo2.SymComManager.SCMDelayed;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -32,6 +34,12 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+        button2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setButtonAction(DelayedRequestActivity.class);
+            }
+        });
         button3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -46,5 +54,10 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+    }
+
+    private void setButtonAction(Class c) {
+        Intent intent = new Intent(MainActivity.this, c);
+        startActivity(intent);
     }
 }

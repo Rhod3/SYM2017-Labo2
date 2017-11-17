@@ -12,17 +12,38 @@ import ch.heig.sym_labo2.activities.SCMActivities;
 
 public class SCMDelayed extends SCMAsyncSendRequest {
 
-    private ArrayList<Pair<String, String>> waitingRequests = new ArrayList<>();
+    private final ArrayList<Pair<String, String>> waitingRequests;
+    private boolean firstTimeNoConnection;
 
     public SCMDelayed (SCMActivities activity){
         super(activity);
+        waitingRequests = new ArrayList<>();
+        firstTimeNoConnection = false;
     }
 
     public void sendRequest(String payload, String url) throws Exception {
         if (isNetworkAvailable()) {
             super.sendRequest(payload, url);
         } else {
+            waitingRequests.add(new Pair<String, String>(payload, url));
 
+            if (!firstTimeNoConnection) {
+                firstTimeNoConnection = true;
+
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        while (isNetworkAvailable() && (waitingRequests.size() > 0)) {
+                            Pair<String, String> request = waitingRequests.remove(0);
+                            try {
+                                SCMDelayed.super.sendRequest(request.first, request.second);
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    }
+                }).start();
+            }
         }
     }
 

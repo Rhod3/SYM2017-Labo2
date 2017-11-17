@@ -7,6 +7,7 @@ import java.io.InputStream;
 
 import ch.heig.sym_labo2.activities.SCMActivities;
 import ch.heig.sym_labo2.utils.Fruit;
+import ch.heig.sym_labo2.utils.PhoneType;
 import okhttp3.MediaType;
 import okhttp3.Request;
 import okhttp3.RequestBody;
@@ -65,5 +66,22 @@ public class SCMJsonObject extends SCMAsyncSendRequest {
 
     private String loadJsonFromFile(String path){
         return null;
+    }
+
+    private String createXML(Person person) {
+        final String gender = "Woman";
+        final String phone  = "079 717 28 48";
+        final PhoneType phoneType = PhoneType.HOME;
+        String format =
+                "<?xml version='1.0' encoding='UTF-8'?>" +
+                        "<directory>" +
+                        "   <person>" +
+                        "       <name>%s</name>" +
+                        "       <firstname>%s</firstname>" +
+                        "       <gender>%s</gender>" +
+                        "       <phone type='%s'>%s</phone>" +
+                        "   </person>" +
+                        "</directory>";
+        return String.format(format, person.getName(), person.getFirstName(), gender, phoneType, phone);
     }
 }
