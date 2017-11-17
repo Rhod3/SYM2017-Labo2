@@ -7,6 +7,7 @@ import java.io.InputStream;
 
 import ch.heig.sym_labo2.activities.SCMActivities;
 import ch.heig.sym_labo2.utils.Fruit;
+import ch.heig.sym_labo2.utils.Person;
 import ch.heig.sym_labo2.utils.PhoneType;
 import okhttp3.MediaType;
 import okhttp3.Request;
@@ -82,6 +83,6 @@ public class SCMJsonObject extends SCMAsyncSendRequest {
                         "       <phone type='%s'>%s</phone>" +
                         "   </person>" +
                         "</directory>";
-        return String.format(format, person.getName(), person.getFirstName(), gender, phoneType, phone);
+        return String.format(format, person.getName(), person.getFirstname(), gender, phoneType.toString(), phone);
     }
 }

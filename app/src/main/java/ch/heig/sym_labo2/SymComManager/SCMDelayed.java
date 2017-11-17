@@ -6,6 +6,9 @@ import android.net.NetworkInfo;
 import android.support.v4.util.Pair;
 
 import java.util.ArrayList;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 import ch.heig.sym_labo2.activities.SCMActivities;
 
@@ -22,6 +25,8 @@ public class SCMDelayed extends SCMAsyncSendRequest {
     }
 
     public void sendRequest(String payload, String url) throws Exception {
+        final int timeBetweenTasks = 3;
+
         if (isNetworkAvailable()) {
             super.sendRequest(payload, url);
         } else {
@@ -30,19 +35,22 @@ public class SCMDelayed extends SCMAsyncSendRequest {
             if (!firstTimeNoConnection) {
                 firstTimeNoConnection = true;
 
-                new Thread(new Runnable() {
-                    @Override
-                    public void run() {
-                        while (isNetworkAvailable() && (waitingRequests.size() > 0)) {
-                            Pair<String, String> request = waitingRequests.remove(0);
-                            try {
-                                SCMDelayed.super.sendRequest(request.first, request.second);
-                            } catch (Exception e) {
-                                e.printStackTrace();
+                ScheduledExecutorService scheduler =
+                        Executors.newSingleThreadScheduledExecutor();
+
+                scheduler.scheduleAtFixedRate
+                        (new Runnable() {
+                            public void run() {
+                                while (isNetworkAvailable() && (waitingRequests.size() > 0)) {
+                                    Pair<String, String> request = waitingRequests.remove(0);
+                                    try {
+                                        SCMDelayed.super.sendRequest(request.first, request.second);
+                                    } catch (Exception e) {
+                                        e.printStackTrace();
+                                    }
+                                }
                             }
-                        }
-                    }
-                }).start();
+                        }, 0, timeBetweenTasks, TimeUnit.SECONDS);
             }
         }
     }
