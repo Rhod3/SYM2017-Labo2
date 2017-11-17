@@ -102,9 +102,16 @@ public class SCMCompressed extends SCMJsonObject {
         Inflater decompresser = new Inflater(true);
         decompresser.setInput(toInflate, 0, compressedDataLength);
         byte[] result = new byte[compressedDataLength];
-        decompresser.inflate(result);
+        int resultLength = decompresser.inflate(result);
         decompresser.end();
 
-        return result.toString();
+        String outputString = null;
+        try {
+            outputString = new String(result, 0, resultLength, "UTF-8");
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+
+        return outputString;
     }
 }

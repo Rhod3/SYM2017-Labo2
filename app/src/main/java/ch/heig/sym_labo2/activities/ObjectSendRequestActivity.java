@@ -14,28 +14,40 @@ import ch.heig.sym_labo2.SymComManager.SymComManager;
 public class ObjectSendRequestActivity extends SCMActivities {
 
     // Attributs
-    private Button sendButton = null;
+    private Button bigJsonButton = null;
     private EditText inputText = null;
     private TextView responseText = null;
-    private SymComManager symComManager = null;
+    private SCMJsonObject symComManager = null;
+
+    private Button fruitJsonButton = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_object_send_request);
 
-        sendButton = (Button) findViewById(R.id.objectSendButton);
-        inputText = (EditText) findViewById(R.id.inputJson);
+        bigJsonButton = (Button) findViewById(R.id.bigJsonSendButton);
         responseText = (TextView) findViewById(R.id.jsonResponseFromServerTextView);
         responseText.setMovementMethod(new ScrollingMovementMethod());
+        fruitJsonButton = (Button) findViewById(R.id.fruitJsonButton);
 
         symComManager = new SCMJsonObject(this);
 
-        sendButton.setOnClickListener(new View.OnClickListener() {
+        bigJsonButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 try {
-                    symComManager.sendRequest(inputText.getText().toString(), "http://sym.iict.ch/rest/json");
+                    symComManager.sendRequest("big.json", "http://sym.iict.ch/rest/json");
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+        fruitJsonButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                try {
+                    symComManager.sendFruit("http://sym.iict.ch/rest/json");
                 } catch (Exception e) {
                     e.printStackTrace();
                 }

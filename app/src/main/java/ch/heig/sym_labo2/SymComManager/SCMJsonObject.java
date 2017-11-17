@@ -49,7 +49,7 @@ public class SCMJsonObject extends SCMAsyncSendRequest {
     }
 
     protected String loadJSONFromAsset(String filename) {
-        String json = null;
+        String json;
         try {
             InputStream is = getActivity().getAssets().open(filename);
             int size = is.available();

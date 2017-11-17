@@ -1,6 +1,5 @@
 package ch.heig.sym_labo2.activities;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.method.ScrollingMovementMethod;
 import android.view.View;
@@ -9,7 +8,6 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import ch.heig.sym_labo2.R;
-import ch.heig.sym_labo2.SymComManager.SCMAsyncSendRequest;
 import ch.heig.sym_labo2.SymComManager.SCMCompressed;
 import ch.heig.sym_labo2.SymComManager.SymComManager;
 
@@ -25,7 +23,6 @@ public class CompressedSendRequestActivity extends SCMActivities {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_compressed_send_request);
-
 
         sendButton = (Button) findViewById(R.id.compressedSendButton);
         inputText = (EditText) findViewById(R.id.compressedInputText);
@@ -48,6 +45,6 @@ public class CompressedSendRequestActivity extends SCMActivities {
 
     @Override
     public void setResponseText(String text) {
-
+        responseText.setText(text);
     }
 }
