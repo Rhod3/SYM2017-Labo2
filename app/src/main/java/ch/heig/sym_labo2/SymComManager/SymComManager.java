@@ -1,7 +1,5 @@
 package ch.heig.sym_labo2.SymComManager;
 
-import android.app.Activity;
-
 import java.util.concurrent.TimeUnit;
 
 import ch.heig.sym_labo2.activities.SCMActivities;

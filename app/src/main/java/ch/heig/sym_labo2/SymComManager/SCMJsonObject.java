@@ -48,7 +48,7 @@ public class SCMJsonObject extends SCMAsyncSendRequest {
     }
 
     protected String loadJSONFromAsset(String filename) {
-        String json = null;
+        String json;
         try {
             InputStream is = getActivity().getAssets().open(filename);
             int size = is.available();
@@ -61,9 +61,5 @@ public class SCMJsonObject extends SCMAsyncSendRequest {
             return null;
         }
         return json;
-    }
-
-    private String loadJsonFromFile(String path){
-        return null;
     }
 }
