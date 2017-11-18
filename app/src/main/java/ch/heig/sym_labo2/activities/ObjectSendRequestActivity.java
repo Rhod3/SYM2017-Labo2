@@ -9,17 +9,21 @@ import android.widget.TextView;
 
 import ch.heig.sym_labo2.R;
 import ch.heig.sym_labo2.SymComManager.SCMJsonObject;
-import ch.heig.sym_labo2.SymComManager.SymComManager;
+import ch.heig.sym_labo2.SymComManager.SCMXmlObject;
 
 public class ObjectSendRequestActivity extends SCMActivities {
 
     // Attributs
     private Button bigJsonButton = null;
-    private EditText inputText = null;
     private TextView responseText = null;
-    private SCMJsonObject symComManager = null;
+    private SCMJsonObject scmJsonObject = null;
+    private SCMXmlObject scmXmlObject = null;
 
-    private Button fruitJsonButton = null;
+
+    private Button personJsonButton = null;
+    private Button personXMLButton = null;
+    private EditText name = null;
+    private EditText firstname = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,27 +31,41 @@ public class ObjectSendRequestActivity extends SCMActivities {
         setContentView(R.layout.activity_object_send_request);
 
         bigJsonButton = (Button) findViewById(R.id.bigJsonSendButton);
+        name = (EditText) findViewById(R.id.personNameEditText);
+        firstname = (EditText) findViewById(R.id.personNameEditText);
         responseText = (TextView) findViewById(R.id.jsonResponseFromServerTextView);
         responseText.setMovementMethod(new ScrollingMovementMethod());
-        fruitJsonButton = (Button) findViewById(R.id.fruitJsonButton);
+        personJsonButton = (Button) findViewById(R.id.personJsonButton);
+        personXMLButton = (Button) findViewById(R.id.personXMLButton);
 
-        symComManager = new SCMJsonObject(this);
+        scmJsonObject = new SCMJsonObject(this);
+        scmXmlObject = new SCMXmlObject(this);
 
         bigJsonButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 try {
-                    symComManager.sendRequest("big.json", "http://sym.iict.ch/rest/json");
+                    scmJsonObject.sendRequest("big.json", "http://sym.iict.ch/rest/json");
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
             }
         });
-        fruitJsonButton.setOnClickListener(new View.OnClickListener() {
+        personXMLButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 try {
-                    symComManager.sendFruit("http://sym.iict.ch/rest/json");
+                    scmXmlObject.sendPerson(name.getText().toString(), firstname.getText().toString(), "http://sym.iict.ch/rest/xml");
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+        personJsonButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                try {
+                    scmJsonObject.sendPerson(name.getText().toString(), firstname.getText().toString(), "http://sym.iict.ch/rest/json");
                 } catch (Exception e) {
                     e.printStackTrace();
                 }

@@ -11,9 +11,9 @@ public abstract class SymComManager {
 
     private SCMActivities activity;
     private static OkHttpClient client = new OkHttpClient.Builder()
-                                            .connectTimeout(5, TimeUnit.SECONDS)
-                                            .writeTimeout(5, TimeUnit.SECONDS)
-                                            .readTimeout(5, TimeUnit.SECONDS)
+                                            .connectTimeout(30, TimeUnit.SECONDS)
+                                            .writeTimeout(30, TimeUnit.SECONDS)
+                                            .readTimeout(30, TimeUnit.SECONDS)
                                             .build();
 
     public SymComManager(SCMActivities activity){

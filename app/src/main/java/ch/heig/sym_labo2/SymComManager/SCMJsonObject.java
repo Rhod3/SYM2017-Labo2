@@ -6,11 +6,10 @@ import java.io.IOException;
 import java.io.InputStream;
 
 import ch.heig.sym_labo2.activities.SCMActivities;
-import ch.heig.sym_labo2.utils.Fruit;
+import ch.heig.sym_labo2.utils.Person;
 import okhttp3.MediaType;
 import okhttp3.Request;
 import okhttp3.RequestBody;
-
 
 public class SCMJsonObject extends SCMAsyncSendRequest {
 
@@ -18,10 +17,10 @@ public class SCMJsonObject extends SCMAsyncSendRequest {
         super(activity);
     }
 
-    public void sendFruit(String url){
-        Fruit fruit = new Fruit("Banana", "yellow");
+    public void sendPerson(String name, String firstname, String url){
+        Person person = new Person(name, firstname);
         Gson gson = new Gson();
-        String json = gson.toJson(fruit);
+        String json = gson.toJson(person);
 
         Request request = buildPostRequest(json, url);
         getClient().newCall(request).enqueue(responseCallback());
