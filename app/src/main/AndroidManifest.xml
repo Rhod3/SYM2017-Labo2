@@ -23,7 +23,8 @@
             android:name=".activities.AsyncSendRequestActivity"
             android:label="@string/title_activity_async_send_request" />
         <activity android:name=".activities.ObjectSendRequestActivity" />
-        <activity android:name=".activities.CompressedSendRequestActivity"></activity>
+        <activity android:name=".activities.CompressedSendRequestActivity" />
+        <activity android:name=".activities.DelayedSendRequestActivity"></activity>
     </application>
 
 </manifest>

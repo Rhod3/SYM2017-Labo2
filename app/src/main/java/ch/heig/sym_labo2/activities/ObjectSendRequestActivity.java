@@ -32,7 +32,7 @@ public class ObjectSendRequestActivity extends SCMActivities {
 
         bigJsonButton = (Button) findViewById(R.id.bigJsonSendButton);
         name = (EditText) findViewById(R.id.personNameEditText);
-        firstname = (EditText) findViewById(R.id.personNameEditText);
+        firstname = (EditText) findViewById(R.id.personFirstnameEditText);
         responseText = (TextView) findViewById(R.id.jsonResponseFromServerTextView);
         responseText.setMovementMethod(new ScrollingMovementMethod());
         personJsonButton = (Button) findViewById(R.id.personJsonButton);
