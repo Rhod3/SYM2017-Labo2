@@ -17,6 +17,9 @@ import okhttp3.RequestBody;
 import okhttp3.Response;
 import okhttp3.ResponseBody;
 
+/**
+ * Classe de traitement permettant d'envoyer des données compressées au serveur
+ */
 public class SCMCompressed extends SCMJsonObject {
 
     public SCMCompressed(SCMActivities activity) {
@@ -83,6 +86,12 @@ public class SCMCompressed extends SCMJsonObject {
                 .build();
     }
 
+    /**
+     * Compresse toDeflate
+     * @param toDeflate les données à compresser
+     * @return toDeflate compressé
+     * @throws UnsupportedEncodingException si l'encodate de toDeflate n'est pas connu
+     */
     private byte[] deflate(String toDeflate) throws UnsupportedEncodingException {
         byte[] input = toDeflate.getBytes("UTF-8");
         // Compress the bytes
@@ -96,6 +105,12 @@ public class SCMCompressed extends SCMJsonObject {
         return output;
     }
 
+    /**
+     * Décompresse toInflate
+     * @param toInflate les données à décompresser
+     * @return toInflate décompressé
+     * @throws DataFormatException
+     */
     private String inflate(byte[] toInflate) throws DataFormatException {
         // Decompress the bytes
         int compressedDataLength = toInflate.length;

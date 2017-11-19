@@ -12,7 +12,10 @@ import java.util.concurrent.TimeUnit;
 
 import ch.heig.sym_labo2.activities.SCMActivities;
 
-
+/**
+ * Classe de traitement permettant de stocker les requêtes dans le cas où le serveur n'est pas accessible
+ * et de les envoyer lorsque le serveur devient accessible.
+ */
 public class SCMDelayed extends SCMAsyncSendRequest {
 
     private final ArrayList<Pair<String, String>> waitingRequests;
@@ -55,6 +58,10 @@ public class SCMDelayed extends SCMAsyncSendRequest {
         }
     }
 
+    /**
+     * Indique si l'appareil faisant tourner l'application est connecté au réseau
+     * @return vrai si l'appareil est connecté au réseau. Faux sinon.
+     */
     private boolean isNetworkAvailable() {
         ConnectivityManager connectivityManager
                 = (ConnectivityManager) getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
