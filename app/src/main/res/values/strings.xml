@@ -2,4 +2,6 @@
     <string name="app_name">SYM Labo2</string>
     <string name="title_activity_async_send_request">Async</string>
     <string name="title_activity_object_send_request">JSON</string>
+    <string name="small_file">small.json</string>
+    <string name="big_file">big.json</string>
 </resources>
