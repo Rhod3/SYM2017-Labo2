@@ -71,6 +71,8 @@ public class SCMCompressed extends SCMJsonObject {
     public Request buildPostRequest(String payload, String url) {
         RequestBody requestBody = null;
         try {
+            byte[] compressed = deflate(payload);
+            int tmp = compressed.length;
             requestBody = RequestBody.create(
                     MediaType.parse("application/json; charset=utf-8"),
                     deflate(payload)
@@ -96,13 +98,15 @@ public class SCMCompressed extends SCMJsonObject {
         byte[] input = toDeflate.getBytes("UTF-8");
         // Compress the bytes
         byte[] output = new byte[toDeflate.length()];
-        Deflater compresser = new Deflater(Deflater.BEST_COMPRESSION, true);
+        Deflater compresser = new Deflater(Deflater.DEFAULT_COMPRESSION, true);
         compresser.setInput(input);
         compresser.finish();
-        compresser.deflate(output);
+        int compressedDataLength = compresser.deflate(output);
         compresser.end();
 
-        return output;
+        byte[] res = new byte[compressedDataLength];
+        System.arraycopy(output, 0, res, 0, compressedDataLength);
+        return res;
     }
 
     /**

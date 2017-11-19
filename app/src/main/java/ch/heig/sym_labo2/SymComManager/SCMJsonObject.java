@@ -43,6 +43,7 @@ public class SCMJsonObject extends SCMAsyncSendRequest {
      */
     public void sendRequest(String filename, String url) throws Exception {
         String json = loadJSONFromAsset(filename);
+        int tmp = json.getBytes().length;
         Request request = buildPostRequest(json, url);
         getClient().newCall(request).enqueue(responseCallback());
     }
