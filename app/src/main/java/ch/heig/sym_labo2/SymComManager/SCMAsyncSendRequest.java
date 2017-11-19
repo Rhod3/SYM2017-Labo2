@@ -12,6 +12,9 @@ import okhttp3.RequestBody;
 import okhttp3.Response;
 import okhttp3.ResponseBody;
 
+/**
+ * Classe de traitement permettant d'envoyer des objets au serveur de façon asynchrone
+ */
 public class SCMAsyncSendRequest extends SymComManager {
 
     public SCMAsyncSendRequest(SCMActivities activity) {

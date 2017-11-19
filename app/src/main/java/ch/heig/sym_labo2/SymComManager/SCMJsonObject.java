@@ -11,12 +11,21 @@ import okhttp3.MediaType;
 import okhttp3.Request;
 import okhttp3.RequestBody;
 
+/**
+ * Classe de traitement permettant de sérialiser des objets en JSON pour les envoyer au serveur
+ */
 public class SCMJsonObject extends SCMAsyncSendRequest {
 
     public SCMJsonObject(SCMActivities activity){
         super(activity);
     }
 
+    /**
+     * Crée un Person à partir de name et firstname pour le sérialiser en JSON et l'envoyer à url.
+     * @param name le nom du Person
+     * @param firstname le prénom du Person
+     * @param url le serveur auquel on envoie le Person sérialisé
+     */
     public void sendPerson(String name, String firstname, String url){
         Person person = new Person(name, firstname);
         Gson gson = new Gson();
@@ -26,6 +35,12 @@ public class SCMJsonObject extends SCMAsyncSendRequest {
         getClient().newCall(request).enqueue(responseCallback());
     }
 
+    /**
+     * Envoie un JSON contenu dans le fichier filename
+     * @param filename le fichier contenant le JSON à transmetre
+     * @param url le serveur auquel on désire transmettre le JSON contenu dans filename
+     * @throws Exception
+     */
     public void sendRequest(String filename, String url) throws Exception {
         String json = loadJSONFromAsset(filename);
         int tmp = json.getBytes().length;
@@ -47,6 +62,11 @@ public class SCMJsonObject extends SCMAsyncSendRequest {
                 .build();
     }
 
+    /**
+     * Charge un JSON à partir du fichier filename
+     * @param filename le fichier contenant le JSON à charger
+     * @return le JSON contenu dans filename sous forme de String
+     */
     protected String loadJSONFromAsset(String filename) {
         String json;
         try {
