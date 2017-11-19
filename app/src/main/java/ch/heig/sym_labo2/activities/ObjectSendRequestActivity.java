@@ -11,6 +11,9 @@ import ch.heig.sym_labo2.R;
 import ch.heig.sym_labo2.SymComManager.SCMJsonObject;
 import ch.heig.sym_labo2.SymComManager.SCMXmlObject;
 
+/**
+ * Activité permettant de tester la méthode de transmission de requête par sérialisation.
+ */
 public class ObjectSendRequestActivity extends SCMActivities {
 
     // Attributs
@@ -45,6 +48,7 @@ public class ObjectSendRequestActivity extends SCMActivities {
             @Override
             public void onClick(View v) {
                 try {
+                    // On envoi au serveur un grand JSON dontenu dans un fichier si on clique sur ce bouton
                     scmJsonObject.sendRequest("big.json", "http://sym.iict.ch/rest/json");
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -55,6 +59,7 @@ public class ObjectSendRequestActivity extends SCMActivities {
             @Override
             public void onClick(View v) {
                 try {
+                    // En cliquant sur ce bouton on sérialise les données entrée par l'utilisateur en XML
                     scmXmlObject.sendPerson(name.getText().toString(), firstname.getText().toString(), "http://sym.iict.ch/rest/xml");
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -65,6 +70,7 @@ public class ObjectSendRequestActivity extends SCMActivities {
             @Override
             public void onClick(View v) {
                 try {
+                    // En cliquant sur ce bouton on sérialise les données entrée par l'utilisateur en JSON
                     scmJsonObject.sendPerson(name.getText().toString(), firstname.getText().toString(), "http://sym.iict.ch/rest/json");
                 } catch (Exception e) {
                     e.printStackTrace();

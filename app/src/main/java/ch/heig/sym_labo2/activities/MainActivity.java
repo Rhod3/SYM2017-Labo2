@@ -8,45 +8,53 @@ import android.widget.Button;
 
 import ch.heig.sym_labo2.R;
 
+/**
+ * Activité principale de l'application. Nous pouvons accéder les différentes activités permettant
+ * de tester chaque méthode de transmissions de requêtes depuis cette activité.
+ */
 public class MainActivity extends AppCompatActivity {
 
-    private Button button1 = null;
-    private Button button2 = null;
-    private Button button3 = null;
-    private Button button4 = null;
+    private Button buttonAsync = null;
+    private Button buttonDelayed = null;
+    private Button buttonSerialize = null;
+    private Button buttonCompressed = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        this.button1 = (Button) findViewById(R.id.button_ex1);
-        this.button2 = (Button) findViewById(R.id.button_ex2);
-        this.button3 = (Button) findViewById(R.id.button_ex3);
-        this.button4 = (Button) findViewById(R.id.button_ex4);
+        // Association des boutons de l'interface logique aux boutons déclarés dans la classe
 
-        button1.setOnClickListener(new View.OnClickListener() {
+        this.buttonAsync = (Button) findViewById(R.id.button_ex1);
+        this.buttonDelayed = (Button) findViewById(R.id.button_ex2);
+        this.buttonSerialize = (Button) findViewById(R.id.button_ex3);
+        this.buttonCompressed = (Button) findViewById(R.id.button_ex4);
+
+        // Association d'un comportement à l'événement de click sur chaque bouton (Envoi sur l'activité associée)
+
+        buttonAsync.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, AsyncSendRequestActivity.class);
                 startActivity(intent);
             }
         });
-        button2.setOnClickListener(new View.OnClickListener() {
+        buttonDelayed.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, DelayedSendRequestActivity.class);
                 startActivity(intent);
             }
         });
-        button3.setOnClickListener(new View.OnClickListener() {
+        buttonSerialize.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, ObjectSendRequestActivity.class);
                 startActivity(intent);
             }
         });
-        button4.setOnClickListener(new View.OnClickListener() {
+        buttonCompressed.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, CompressedSendRequestActivity.class);

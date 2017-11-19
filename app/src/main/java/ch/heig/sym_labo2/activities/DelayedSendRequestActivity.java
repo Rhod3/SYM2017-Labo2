@@ -13,6 +13,9 @@ import ch.heig.sym_labo2.SymComManager.SCMAsyncSendRequest;
 import ch.heig.sym_labo2.SymComManager.SCMDelayed;
 import ch.heig.sym_labo2.SymComManager.SymComManager;
 
+/**
+ * Activité permettant de tester la méthode de transmission de requête différée.
+ */
 public class DelayedSendRequestActivity extends SCMActivities {
 
     // Attributs
@@ -37,6 +40,7 @@ public class DelayedSendRequestActivity extends SCMActivities {
             @Override
             public void onClick(View v) {
                 try {
+                    //Envoi de la requête contenant le texte saisi par l'utilisateur au serveur
                     symComManager.sendRequest(inputText.getText().toString(), "http://sym.iict.ch/rest/txt");
                 } catch (Exception e) {
                     e.printStackTrace();

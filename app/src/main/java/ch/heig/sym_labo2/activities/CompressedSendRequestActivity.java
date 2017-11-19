@@ -11,6 +11,9 @@ import ch.heig.sym_labo2.R;
 import ch.heig.sym_labo2.SymComManager.SCMCompressed;
 import ch.heig.sym_labo2.SymComManager.SymComManager;
 
+/**
+ * Activité permettant de tester la méthode de transmission de requête compressée.
+ */
 public class CompressedSendRequestActivity extends SCMActivities {
 
     // Attributs
@@ -35,6 +38,7 @@ public class CompressedSendRequestActivity extends SCMActivities {
             @Override
             public void onClick(View v) {
                 try {
+                    //Envoi de la requête contenant le texte saisi par l'utilisateur au serveur
                     symComManager.sendRequest(inputText.getText().toString(), "http://sym.iict.ch/rest/json");
                 } catch (Exception e) {
                     e.printStackTrace();

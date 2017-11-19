@@ -1,5 +1,8 @@
 package ch.heig.sym_labo2.utils;
 
+/**
+ * Enum utilisé pour la transmission par sérialisation en XML afin de respecter la DTD sur le serveur
+ */
 public enum PhoneType {
     HOME("home"),
     WORK("work"),

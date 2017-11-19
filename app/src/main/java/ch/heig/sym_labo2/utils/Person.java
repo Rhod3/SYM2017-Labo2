@@ -1,9 +1,8 @@
 package ch.heig.sym_labo2.utils;
 
 /**
- * Created by Rhod3 on 17.11.2017.
+ * Modèle sérialisable utilisé pour la transmission par sérialisation (en JSON ou en XML)
  */
-
 public class Person {
     private String name;
     private String firstname;
